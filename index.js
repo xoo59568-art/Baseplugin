@@ -48,7 +48,7 @@ const loadPlugins = () => {
 loadPlugins();
 
 async function startBot() {
-  const { state, saveCreds } = await useMultiFileAuthState("./session");
+  const { state, saveCreds } = await useMultiFileAuthState("./sessions/main");
   let version;
   try {
     const latestVersion = await fetchLatestBaileysVersion();
