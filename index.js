@@ -10,6 +10,8 @@ const {
 } = require("@whiskeysockets/baileys");
 
 const pino = require('pino');
+const express = require("express");
+const app = express();
 const chalk = require('chalk');
 const path = require('path');
 const fs = require('fs');
@@ -180,7 +182,31 @@ if (!chat.message) return;
 }
 
 startBot();
+const app = express();
 
+app.get("/", (req, res) => {
+  res.json({
+    status: true,
+    bot: "Rabbit Multi Session",
+    owner: "Rabbit"
+  });
+});
+
+app.get("/sessions", (req, res) => {
+  const sessions = fs.existsSync("./sessions")
+    ? fs.readdirSync("./sessions")
+    : [];
+
+  res.json({
+    status: true,
+    total: sessions.length,
+    sessions
+  });
+});
+
+app.listen(3000, () => {
+  console.log("[ API ] Running On Port 3000");
+});
 fs.watch(path.join(__dirname, 'plugins'), (eventType, filename) => {
   if (filename && filename.endsWith('.js')) {
     console.log(chalk.yellow(`[ WATCHER ] Perubahan terdeteksi pada plugin: ${filename}. Memuat ulang...`));
