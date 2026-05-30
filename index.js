@@ -73,7 +73,7 @@ async function startBot() {
     });
     if (usePairingCode && !sock.authState.creds.registered) {
         console.clear();
-        console.log(chalk.bold.cyan("Rrvinza-Botz"));
+        console.log(chalk.bold.cyan("Revinza-Botz"));
         const phoneNumber = await question(chalk.yellowBright("\nMasukkan Nomor WhatsApp Anda (Format: 62xxxxxx):\n> "));
         const code = await sock.requestPairingCode(phoneNumber.trim());
         console.log(chalk.greenBright(`\nKode Pairing Anda: `) + chalk.bold.white.bgRed(` ${code} `) + `\n`);
