@@ -1,10 +1,10 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-global.owner = ['6283167006954'];  
-global.premium = ['6283167006954'];
-global.packname = 'ʀᴇᴠɪɴᴢᴀ-ʙᴏᴛ';
-global.author = 'RevinzaModsd';
+global.owner = ['917439382677'];  
+global.premium = ['917439382677'];
+global.packname = '𓋜 -𝐑ᴀ፝֟፝֟ʙʙɪᴛ/>𝟑ن𓂃';
+global.author = '𓋜 -𝐑ᴀ፝֟፝֟ʙʙɪᴛ/>𝟑ن𓂃';
 global.prefix = '.'; 
 
 
