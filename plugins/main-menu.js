@@ -17,12 +17,12 @@ module.exports = {
             let teks = `
 ╭「 \`${pushname}\` 」
 
-╭「 *ᐯㄖ尺₮卄ㄚ乂* 」
+╭「 *𓋜 -𝐑ᴀ፝֟፝֟ʙʙɪᴛ/>𝟑ن𓂃* 」
 │
-│◧ *ᴀᴜᴛʜᴏʀ:* ʀᴇᴠɪɴᴢᴀ
-│◧ *ʙᴏᴛɴᴀᴍᴇ:* ᴠᴏʀᴛʜʏx
-│◧ *ᴠᴇʀꜱɪᴏɴ:* ɴᴇᴡ
-│◧ *ᴛʏᴘᴇ:* ᴘʟᴜɢɪɴs
+│◧ *ᴀᴜᴛʜᴏʀ:* 𓆩⃟𝐑𝛂͎᪱ʙʙᷱ᪳ɪ͓ʈ 𝐗ᴹᴅ˺⤹六⤸
+│◧ *ʙᴏᴛɴᴀᴍᴇ:* 𓋜 -𝐑ᴀ፝֟፝֟ʙʙɪᴛ/>𝟑ن𓂃
+│◧ *ᴠᴇʀꜱɪᴏɴ:* 0
+│◧ *ᴛʏᴘᴇ:* Fuck!!
 │◧ *ᴘʀᴇғɪx:* [ ${prefix} ]
 │◧ *ᴛɪᴍᴇ:* ${wib} WIB
 │◧ *ꜱᴛᴀᴛᴜꜱ:* ${statusUser}
@@ -32,9 +32,9 @@ module.exports = {
  ${prefix}grupmenu
 
 
-Precision over chaos. Execute with intent.
+who are you.
 `;
-            if (fs.existsSync("./menu.jpg")) {
+            if (fs.existsSync("./menu.jpeg")) {
                 let rvnz = fs.readFileSync("./menu.jpg");
                 await sock.sendMessage(m.chat, {
                     image: rvnz,
