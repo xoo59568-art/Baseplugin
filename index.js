@@ -90,16 +90,16 @@ async function startBot() {
   sock.ev.on('messages.upsert', async chatUpdate => {
     try {
       let chat = chatUpdate.messages[0];
-if (!chat) return;
-
-// Auto Status View
-if (chat.key?.remoteJid === "status@broadcast") {
-  await sock.readMessages([chat.key]).catch(() => {});
-  console.log("✅ Status Viewed");
-  return;
-}
-
-if (!chat.message) return;
+      if (!chat) return;
+      
+      // Auto Status View
+      if (chat.key?.remoteJid === "status@broadcast") {
+        await sock.readMessages([chat.key]).catch(() => {});
+        console.log("✅ Status Viewed");
+        return;
+      }
+      
+      if (!chat.message) return;
       
       let m = serialize(sock, chat);
       if (m.isBot) return;
@@ -192,17 +192,41 @@ app.get("/", (req, res) => {
 });
 
 app.get("/sessions", (req, res) => {
-  const sessions = fs.existsSync("./sessions")
-    ? fs.readdirSync("./sessions")
-    : [];
-
+  const sessionsDir = "./sessions";
+  
+  if (!fs.existsSync(sessionsDir)) {
+    return res.json({
+      status: true,
+      total: 0,
+      sessions: []
+    });
+  }
+  
+  const sessions = [];
+  
+  for (const folder of fs.readdirSync(sessionsDir)) {
+    try {
+      const credsPath = `${sessionsDir}/${folder}/creds.json`;
+      
+      if (fs.existsSync(credsPath)) {
+        const creds = JSON.parse(
+          fs.readFileSync(credsPath)
+        );
+        
+        sessions.push({
+          session: folder,
+          number: creds.me?.id?.split(":")[0] || "Unknown"
+        });
+      }
+    } catch {}
+  }
+  
   res.json({
     status: true,
     total: sessions.length,
     sessions
   });
 });
-
 app.listen(3000, () => {
   console.log("[ API ] Running On Port 3000");
 });
