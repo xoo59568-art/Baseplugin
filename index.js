@@ -182,7 +182,6 @@ if (!chat.message) return;
 }
 
 startBot();
-const app = express();
 
 app.get("/", (req, res) => {
   res.json({
