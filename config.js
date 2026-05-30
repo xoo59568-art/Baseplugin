@@ -5,7 +5,7 @@ global.owner = ['917439382677'];
 global.premium = ['917439382677'];
 global.packname = '𓋜 -𝐑ᴀ፝֟፝֟ʙʙɪᴛ/>𝟑ن𓂃';
 global.author = '𓋜 -𝐑ᴀ፝֟፝֟ʙʙɪᴛ/>𝟑ن𓂃';
-global.prefix = '.'; 
+global.prefix = '!'; 
 
 
 let file = require.resolve(__filename);
