@@ -15,7 +15,6 @@ function serialize(sock, m) {
         m.mtype = getContentType(m.message);
         m.msg = (m.mtype === 'viewOnceMessage' || m.mtype === 'viewOnceMessageV2') ? m.message[m.mtype].message[getContentType(m.message[m.mtype].message)] : m.message[m.mtype];
         
- 
         let responseId = '';
         if (m.mtype === 'interactiveResponseMessage') {
             try {
@@ -35,7 +34,6 @@ function serialize(sock, m) {
                  (m.mtype === 'templateButtonReplyMessage' && m.msg.selectedId) || 
                  m.text || '';
         
-        
         m.quoted = m.msg.contextInfo ? m.msg.contextInfo.quotedMessage : null;
         if (m.quoted) {
             let type = getContentType(m.quoted);
@@ -52,8 +50,7 @@ function serialize(sock, m) {
             m.quoted.text = m.quoted.text || m.quoted.caption || m.quoted.conversation || '';
         }
     }
-    
-    
+   
     m.reply = (text, options = {}) => sock.sendMessage(m.chat, { text: text, ...options }, { quoted: m });
     
     return m;
