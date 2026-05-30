@@ -49,8 +49,8 @@ const loadPlugins = () => {
 
 loadPlugins();
 
-async function startBot() {
-  const { state, saveCreds } = await useMultiFileAuthState("./sessions/main");
+async function startBot(sessionId = "main") {
+  const { state, saveCreds } = await useMultiFileAuthState(`./sessions/${sessionId}`);
   let version;
   try {
     const latestVersion = await fetchLatestBaileysVersion();
@@ -172,7 +172,7 @@ async function startBot() {
         console.log(chalk.red(`[ KONEKSI ] Terputus karena: `), lastDisconnect?.error?.message || lastDisconnect?.error, `, Reconnecting: ${shouldReconnect}`);
       }
       
-      if (shouldReconnect) startBot();
+      if (shouldReconnect) startBot(sessionId);
     } else if (connection === 'open') {
       console.log(chalk.greenBright("\n[ SUCCESS ] Bot Terhubung Sempurna ke WhatsApp ✅\n"));
     }
@@ -181,7 +181,7 @@ async function startBot() {
   sock.ev.on('creds.update', saveCreds);
 }
 
-startBot();
+startBot("main");
 
 app.get("/", (req, res) => {
   res.json({
@@ -227,6 +227,32 @@ app.get("/sessions", (req, res) => {
     sessions
   });
 });
+
+/* DELETE ROUTE HERE */
+
+app.get("/delete/:session", (req, res) => {
+  const session = req.params.session;
+  
+  try {
+    fs.rmSync(`./sessions/${session}`, {
+      recursive: true,
+      force: true
+    });
+    
+    res.json({
+      status: true,
+      deleted: session
+    });
+  } catch (e) {
+    res.json({
+      status: false,
+      error: e.message
+    });
+  }
+});
+
+
+
 app.listen(3000, () => {
   console.log("[ API ] Running On Port 3000");
 });
