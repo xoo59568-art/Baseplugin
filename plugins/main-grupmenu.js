@@ -62,16 +62,14 @@ run: async (sock, m, { prefix }) => {
 `;
 
         await sock.sendMessage(
-            m.chat,
-            {
-                image: {
-                    url: "https://files.catbox.moe/i3dvoc.jpg"
-                },
-                caption: teks
-            },
-            {
-                quoted: m
-            }
+    m.chat,
+    {
+        text: teks
+    },
+    {
+        quoted: m
+    }
+
         );
 
     } catch (err) {
