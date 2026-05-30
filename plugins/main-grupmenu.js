@@ -59,7 +59,7 @@ run: async (sock, m, { prefix }) => {
 ╰━━━━━━━━━━━━━━━━━━━━⬣
 
 «Powered By 𓋜 -𝐑ᴀ፝֟፝֟ʙʙɪᴛ/>𝟑ن𓂃
-`;»
+`;
 
         await sock.sendMessage(
             m.chat,
