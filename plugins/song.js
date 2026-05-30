@@ -1,12 +1,12 @@
 const axios = require("axios");
 
 module.exports = {
-command: ["song", "play"],
+command: ["play", "song"],
 
 run: async (sock, m, { text }) => {
     try {
         if (!text) {
-            return m.reply("🎵 Example: .song Faded");
+            return m.reply("🎵 Example: .play Faded");
         }
 
         await sock.sendMessage(m.chat, {
@@ -20,7 +20,7 @@ run: async (sock, m, { text }) => {
             `https://rabbitapi.nett.to/api/song?url=${encodeURIComponent(text)}`
         );
 
-        if (!data.status && !data.result) {
+        if (!data.result || !data.result.url) {
             return m.reply("❌ Song not found.");
         }
 
@@ -31,15 +31,19 @@ run: async (sock, m, { text }) => {
             }
         });
 
+        // Download audio to buffer first
+        const audio = await axios.get(data.result.url, {
+            responseType: "arraybuffer",
+            timeout: 120000
+        });
+
         await sock.sendMessage(
             m.chat,
             {
-                audio: {
-                    url: data.result.url
-                },
+                audio: Buffer.from(audio.data),
                 mimetype: "audio/mpeg",
                 ptt: false,
-                fileName: `${data.result.title}.mp3`
+                fileName: `${data.result.title || "song"}.mp3`
             },
             {
                 quoted: m
@@ -54,7 +58,7 @@ run: async (sock, m, { text }) => {
         });
 
     } catch (err) {
-        console.error(err);
+        console.error("PLAY ERROR:", err);
 
         await sock.sendMessage(m.chat, {
             react: {
@@ -63,7 +67,7 @@ run: async (sock, m, { text }) => {
             }
         });
 
-        m.reply("⚠️ Song download failed.");
+        m.reply("❌ Song download failed.");
     }
 }
 
