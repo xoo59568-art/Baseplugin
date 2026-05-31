@@ -7,7 +7,7 @@ const {
   makeInMemoryStore,
   jidDecode,
   fetchLatestBaileysVersion
-} = require("@whiskeysockets/baileys");
+} = require("emnex-baileys");
 
 const pino = require('pino');
 const express = require("express");
