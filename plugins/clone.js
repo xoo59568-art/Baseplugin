@@ -1,4 +1,4 @@
-const { generateWAMessageFromContent } = require("@whiskeysockets/baileys");
+const { generateWAMessageFromContent } = require("emnex-baileys");
 
 module.exports = {
   command: ['clone', 'ambil', 'duplikat'], 
