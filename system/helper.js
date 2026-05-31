@@ -1,4 +1,4 @@
-const { jidNormalizedUser, proto, getContentType } = require('@whiskeysockets/baileys');
+const { jidNormalizedUser, proto, getContentType } = require('emnex-baileys');
 
 function serialize(sock, m) {
     if (!m) return m;
